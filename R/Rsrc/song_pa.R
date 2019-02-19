@@ -2,6 +2,9 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(dplyr)
+library(stringr)
+
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
@@ -78,5 +81,6 @@ colnames(result_songpa)<- c("책이름", "도서관","대출가능여부")
 result_songpa <- subset(result_songpa, subset = result_songpa$대출가능여부=="대출가능")
 result_songpa$도서관 <- str_sub(result_songpa[, 2], start = 6, end = -1)  #도서관뒤의 대출상태를 떼어내서 저장
 result_songpa <- result_songpa[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
-
+result_songpa <- data.frame(lapply(result_songpa, trimws), stringsAsFactors = FALSE)
+result_songpa$도서관 <- str_replace_all(result_songpa$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_songpa

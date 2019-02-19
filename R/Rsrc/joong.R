@@ -72,5 +72,5 @@ colnames(result_joong)<- c("책이름", "도서관","대출가능여부")
 result_joong <- subset(result_joong, subset = result_joong$대출가능여부=="대출가능")
 result_joong$도서관 <- str_sub(result_joong[, 2], start = 8, end = -1)  #도서관뒤의 대출상태를 떼어내서 저장
 result_joong <- result_joong[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
-
+result_joong$도서관 <- str_replace_all(result_joong$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_joong

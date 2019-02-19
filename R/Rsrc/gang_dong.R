@@ -2,6 +2,7 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(stringr)
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
@@ -63,4 +64,5 @@ colnames(result_gangdong)<- c("책이름", "도서관","대출가능여부")
 result_gangdong <- subset(result_gangdong, subset = result_gangdong$대출가능여부=="대출가능")
 result_gangdong <- result_gangdong[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
 result_gangdong$도서관 <- str_sub(result_gangdong[, 2], start = 1, end = -3)
+result_gangdong$도서관 <- str_replace_all(result_gangdong$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_gangdong
