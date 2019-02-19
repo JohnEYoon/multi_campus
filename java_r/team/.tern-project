@@ -9,6 +9,7 @@
     }
   },
   "libs": [
-    "browser"
+    "browser",
+    "jquery"
   ]
 }

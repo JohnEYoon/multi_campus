@@ -30,6 +30,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	
 	PrintWriter out = response.getWriter();
 
+	System.out.println("hello world");
 	
 	String result = "";
 	try {
@@ -64,7 +65,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		request.setAttribute("listBook_songpa", s);
 		
-		REXP x2=conn.eval("imsi2<-source('../../../../R/Rsrc/gang_dong.R',encoding='UTF-8'); imsi2$value");
+		REXP x2=conn.eval("imsi2<-source('C:/Users/student/Desktop/multi_project/R/Rsrc/gang_dong.R',encoding='UTF-8'); imsi2$value");
 		
 		//conn.eval("search<-'정의란 무엇인가'");
 
