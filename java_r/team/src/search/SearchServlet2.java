@@ -40,7 +40,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		conn.assign("search", booktitle);
 		//conn.eval("book<- '"+booktitle+"'");
 		//REXP x = conn.eval("print(book)");
-		REXP x=conn.eval("imsi<-source('c:/RStudy/resultsongpa2.R',encoding='UTF-8'); imsi$value");
+		REXP x=conn.eval("imsi<-source('C:/Users/student/Desktop/multi_project/R/Rsrc/song_pa.R',encoding='UTF-8'); imsi$value");
 		RList list = x.asList();
 		int v_size = list.size();
 		int d_length = list.at(0).length();
@@ -64,7 +64,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		request.setAttribute("listBook_songpa", s);
 		
-		REXP x2=conn.eval("imsi2<-source('c:/RStudy/resultseongbook.R',encoding='UTF-8'); imsi2$value");
+		REXP x2=conn.eval("imsi2<-source('../../../../R/Rsrc/gang_dong.R',encoding='UTF-8'); imsi2$value");
 		
 		//conn.eval("search<-'정의란 무엇인가'");
 
