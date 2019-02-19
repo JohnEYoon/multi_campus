@@ -2,29 +2,18 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(stringr)
+library(dplyr)
+
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
-# 
-
-remDr$navigate("http://lib.sdm.or.kr/main/main.asp")
-
-searchbar<- remDr$findElement(using = "css", "[name= 'searchWord']")
-searchbar$sendKeysToElement(list(search))
-
-searchbutton<-remDr$findElements(using='css','#search > ul > li.btn > input')
-sapply(searchbutton,function(x){x$clickElement()})
-
-read <- remDr$findElements(using = "css", '#_searchListChk > div:nth-child(1) > dl > dt > a ')
-sapply(read, function (x) {x$clickElement()})
-#getElementText()})
-
+#
 ####강남도서관 - lib과 able을 분리해줘야함
 
 remDr$navigate("https://library.gangnam.go.kr/")
-
 searchbar<- remDr$findElement(using = "css", "[name= 'q']")
-searchbar$sendKeysToElement(list("정의란 무엇인가"))
+searchbar$sendKeysToElement(list(search))
 
 searchbutton<-remDr$findElements(using='css','#searchForm > a.btSch')
 sapply(searchbutton,function(x){x$clickElement()})
@@ -50,7 +39,7 @@ temp_ab<-sapply(read, function (x) {x$getElementText()})
 
 
 
-result_gangnam<-data.frame((temp_title), unlist(temp_lib), unlist(temp_ab))
+result_gangnam<-data.frame(unlist(temp_title), unlist(temp_lib), unlist(temp_ab))
 result_gangnam
 
 if(end_page>=2){
@@ -73,5 +62,10 @@ if(end_page>=2){
     result_gangnam<-rbind(result_gangnam, data.frame(unlist(temp_title), unlist(temp_lib), unlist(temp_ab)))
   }#
 }
+
 colnames(result_gangnam)<- c("책이름", "도서관","대출가능여부")
+result_gangnam <- subset(result_gangnam, str_sub(result_gangnam[, 3], start = -4, end = -1) == "대출가능") #대출가능한것만 추출
+result_gangnam$도서관 <- str_sub(result_gangnam[, 2], start = 1, end = -6)  #도서관뒤의 대출상태를 떼어내서 저장
+result_gangnam <- result_gangnam[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
 result_gangnam
+

@@ -73,4 +73,5 @@ if(end_page>=2){
 }
 colnames(result_seomoon)<- c("책이름", "도서관","대출가능여부")
 result_seomoon <- subset(result_seomoon, subset = result_seomoon$대출가능여부=="대출가능")
+result_seomoon <- result_seomoon[-3]
 result_seomoon

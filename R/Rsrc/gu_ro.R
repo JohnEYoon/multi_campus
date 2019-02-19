@@ -73,4 +73,6 @@ if(lastpage>=2){
     
   }
 }
+result_guro <- result_guro[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+
 result_guro
