@@ -1,17 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.lang.String"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>효원이네 도서관</title>
+<title>추악한 까마귀</title>
+
+<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+<script>
+
+	var lati;
+	var longi;
+	var old=false;
+	
+    $(function() {        
+        // Geolocation API에 액세스할 수 있는지를 확인
+        if (navigator.geolocation) {
+            //위치 정보를 얻기
+            navigator.geolocation.getCurrentPosition (function(pos) {
+                
+            	<%if(request.getParameter("lat")==null){%>
+            	$('#latitude').html(pos.coords.latitude);     // 위도\
+                $('#longitude').html(pos.coords.longitude); // 경도
+  
+                
+               location.href="start.jsp?lat="+pos.coords.latitude+"&long="+pos.coords.longitude;
+                <%}%>
+            });
+        } else {
+            alert("이 브라우저에서는 Geolocation이 지원되지 않습니다 chrome을 이용해주시기 바랍니다.");
+        }
+    });
+    
+</script>
+
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title></title>
 
     <!--Bootstrap core CSS-->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,19 +62,35 @@
     <link rel="stylesheet" href="css/contact-input-style.css">
     <link rel="stylesheet" href="css/hover-effect.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    
+    
+<style>
+
+
+</style>
+    
+    
 </head>
+
+
 <body>
 
-
-<section class="banner-sec" id="home">
-<div class="container">
+	<%
+	String lati = request.getParameter("lat");
+	String longi = request.getParameter("long");
+	
+	%>
+<section class="banner-sec">
 <div class="jumbotron">
+<div class="container"> 
 <br><br><br><br><br>
 <h1>Search BOOK</h1>
 <div class="input-group">
 <span class="input-group-btn">
 	<form action="/team/search4" method="get">
 	<input type="text" placeholder="책 검색" class="form-control" id=title name=booktitle>
+	<input type="hidden" name="latitude" value=<%=lati %>>
+	<input type="hidden" name="longitude" value=<%=longi %>>
 	<button type="submit" class="btn btn-search">Search</button>
 	</form>
 </span>
@@ -76,14 +121,15 @@
         <h3 class="up-effect">차재현</h3>
                 <div class="contact-con down-effect"><i class="fa fa-phone fa-2x"></i><i class="fa fa-envelope-o fa-2x"></i><i class="fa fa-heart-o fa-2x"></i></div>
       </div>
-    </div>
+	     </div>
   </div>
 </section>
 
 <footer>
 <div class="container">
 <div class="row">
-<p class="text-center">Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+<p class="text-center">
+	
 </p>
 </div>
 </div>

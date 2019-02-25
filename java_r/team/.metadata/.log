@@ -1,0 +1,12 @@
+!SESSION 2019-02-21 10:17:09.939 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_191
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\multi_campus\java_r\team -dev file:C:/multi_campus/java_r/.metadata/.plugins/org.eclipse.pde.core/New_configuration/dev.properties
+
+!ENTRY org.eclipse.ui 2 0 2019-02-21 10:17:17.408
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2019-02-21 10:17:17.408
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'

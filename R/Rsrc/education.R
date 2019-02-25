@@ -2,6 +2,7 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(stringr)
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
@@ -9,7 +10,7 @@ remDr$navigate("https://lib.sen.go.kr/lib/index.do?getContextPath=")
 
 #검색창에 입력하고 넘어가기
 searchbar<- remDr$findElement(using = "css", "#search_text_1")  #검색창
-searchbar$sendKeysToElement(list(search))
+searchbar$sendKeysToElement(list("문헌정보학"))
 
 searchbutton<-remDr$findElements(using='css', "#main-search-btn") #검색버트
 sapply(searchbutton,function(x){x$clickElement()})
@@ -69,6 +70,6 @@ colnames(result_jongro)<- c("책이름", "도서관","대출가능여부")
 result_jongro
 result_jongro <- subset(result_jongro, subset = result_jongro$대출가능여부=="자료상태 : 대출가능")
 result_jongro$도서관 <- str_sub(result_jongro[, 2], start = 7, end = -1)  #도서관뒤의 대출상태를 떼어내서 저장
-result_jongro <- result_jongro[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
-
+#result_jongro <- result_jongro[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+result_jongro$도서관 <- str_replace_all(result_jongro$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_jongro  

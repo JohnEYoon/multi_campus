@@ -2,6 +2,7 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(stringr)
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
@@ -73,5 +74,6 @@ if(end_page>=2){
 }
 colnames(result_seomoon)<- c("책이름", "도서관","대출가능여부")
 result_seomoon <- subset(result_seomoon, subset = result_seomoon$대출가능여부=="대출가능")
-result_seomoon <- result_seomoon[-3]
+#result_seomoon <- result_seomoon[-3]
+result_seomoon$도서관 <- str_replace_all(result_seomoon$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_seomoon

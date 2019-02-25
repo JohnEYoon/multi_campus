@@ -2,6 +2,7 @@ library(RSelenium)
 library(httr)
 library(rvest)
 library(XML)
+library(stringr)
 remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome")
 remDr$open()
 
@@ -62,5 +63,6 @@ if(end_page>=2){
 colnames(result_gwangjin)<- c("책이름", "도서관","대출가능여부")
 result_gwangjin <- subset(result_gwangjin, subset = result_gwangjin$대출가능여부=="대출가능")
 result_gwangjin$도서관 <- str_sub(result_gwangjin[, 2], start = 5, end = -1)  #도서관뒤의 대출상태를 떼어내서 저장
-result_gwangjin <- result_gwangjin[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+#result_gwangjin <- result_gwangjin[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+result_gwangjin$도서관 <- str_replace_all(result_gwangjin$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_gwangjin
