@@ -36,6 +36,7 @@ public class SearchServlet4 extends HttpServlet {
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    System.out.println("search4");
    String booktitle=request.getParameter("booktitle");
+   
    System.out.println(booktitle);
    
    
@@ -60,7 +61,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
    String path2 = districts.get(1).split("&")[1];
    ko_districts.add(districts.get(0).split("&")[0]);
    ko_districts.add(districts.get(1).split("&")[0]);
+<<<<<<< HEAD
    System.out.println(districts.get(1).split("&")[0]);
+=======
+   
+>>>>>>> 17010720447a7f4e2f016fe70a599fd230006a79
    libraries = Oracle.get_all_information(ko_districts);//인근 구에 위치한 도서관들의 리스트
 
    String result = "";
@@ -81,7 +86,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
       int arrayRows =  v_size;
       int arrayCols =d_length;
       String[][] temp1 = new String[arrayRows][];  // 데이터프레임의 변수 갯수로 행의 크기를 정한다.
+<<<<<<< HEAD
       String[][] s = new String[arrayCols][arrayRows];
+=======
+      
+>>>>>>> 17010720447a7f4e2f016fe70a599fd230006a79
       for (int i = 0; i < arrayRows; i++) {
          temp1[i] = list.at(i).asStrings();
       }
@@ -96,7 +105,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
       int arrayRows2 =  v_size2;
       int arrayCols2 =d_length2;
       String[][] temp2 = new String[arrayRows2][];  // 데이터프레임의 변수 갯수로 행의 크기를 정한다.
+<<<<<<< HEAD
       String[][] s2 = new String[arrayCols][arrayRows];
+=======
+     
+>>>>>>> 17010720447a7f4e2f016fe70a599fd230006a79
       for (int i = 0; i < arrayRows2; i++) {
          temp2[i] = list2.at(i).asStrings();
       };
@@ -127,7 +140,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     	public int compare(OracleVO o1, OracleVO o2) {
     			return o1.get_distance() < o2.get_distance() ? -1: o1.get_distance() > o2.get_distance() ? 1:0;
     		}
+<<<<<<< HEAD
       });
+=======
+      });//거
+>>>>>>> 17010720447a7f4e2f016fe70a599fd230006a79
       
       System.out.println("최종결과 출력");
       for (int i = 0; i < arrayCols2+arrayCols; i++) {

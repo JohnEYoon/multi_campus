@@ -61,7 +61,11 @@ section{padding:75px 0 100px;}
 .color-bg-nav{background:#1f2d3c; margin-top:0; padding:5px 0}
 
 /*-------------- Top Banner --------------*/  
+<<<<<<< HEAD
 .banner-sec{height:100%; background:url(../img/grand.jpg) no-repeat; background-size:cover;}
+=======
+.banner-sec{height:100%; max-width:120%; background:url(../img/grand.jpg) no-repeat; background-size:cover;}
+>>>>>>> 17010720447a7f4e2f016fe70a599fd230006a79
 .banner-sec .jumbotron{background:none;text-align:center; color:#fff; padding:100px;}
 .banner-sec .jumbotron p{font-size:19px;}
 .banner-sec h1{font-weight:700; text-transform:uppercase; margin-bottom:0}
