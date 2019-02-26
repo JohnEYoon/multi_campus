@@ -65,7 +65,7 @@ colnames(result_gwanak)<- c("책이름", "도서관","대출가능여부")
 result_gwanak <- subset(result_gwanak, subset = result_gwanak$대출가능여부=="대출가능")
 #여긴 스플릿
 
-result_gwanak <- result_gwanak[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+#result_gwanak <- result_gwanak[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
 result_gwanak$도서관 <- data.frame(do.call('rbind', strsplit(as.character(result_gwanak$도서관), split='\n', fixed=T)))[,1]
 result_gwanak$도서관 <- str_replace_all(result_gwanak$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_gwanak

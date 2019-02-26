@@ -7,7 +7,6 @@ remDr<-remoteDriver(remoteServerAddr="localhost", port=4445, browserName="chrome
 remDr$open()
 
 remDr$navigate("http://lib.dongjak.go.kr/dj/index.do")
-
 #검색창에 입력하고 넘어가기
 searchbar<- remDr$findElement(using = "css", "#search_text_1")  #검색창
 searchbar$sendKeysToElement(list(search))
@@ -21,6 +20,7 @@ page <- remDr$findElements(using = "css", '#cms_paging > span > a') #페이지 �
 lp <- sapply(page, function (x) {x$getElementAttribute("keyvalue")})  #현재 페이지에 보이는 페이지(~10)+마지막페이지 값들
 lp <- gsub('.*-([0-9]+).*','\\1',lp)  #위 값 중 숫자만을 나열
 end_page <- max(as.numeric(lp)) #마지막 페이지값
+
 
 read <- remDr$findElements(using = "css", '#search-results > div > div.box > div > div.bif > a')  #책 제목
 temp_title<-sapply(read, function (x) {x$getElementText()})
@@ -44,7 +44,8 @@ if(end_page>=2){
     page_numb<-paste("#cms_paging > span > a:nth-child(",i,")",sep="")#반복문으로 전체 장
     searchbutton<-remDr$findElements(using='css',page_numb)
     sapply(searchbutton,function(x){x$clickElement()})
-      
+
+    
     read <- remDr$findElements(using = "css", '#search-results > div > div.box > div > div.bif > a')#책 제목
     temp_title<-sapply(read, function (x) {x$getElementText()})
     #temp_title
@@ -68,10 +69,9 @@ if(end_page>=2){
 }
 
 colnames(result_dongjak)<- c("책이름", "도서관","대출가능여부")
-result_dongjak
 result_dongjak <- subset(result_dongjak, subset = result_dongjak$대출가능여부=="대출가능\n(비치중)")
 result_dongjak$도서관 <- str_sub(result_dongjak[, 2], start = 9, end = -1)  #도서관뒤의 대출상태를 떼어내서 저장
-result_dongjak <- result_dongjak[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
+#result_dongjak <- result_dongjak[,-3] #대출가능한것만 추출했으니 대출가능여부는 제외하고 책이름, 도서관 두 가지만 표시
 result_dongjak$도서관 <- str_replace_all(result_dongjak$도서관," ","")  #도서관 이름 열의 내,외부의 모든 공백제거
 result_dongjak
 
